@@ -1,4 +1,6 @@
 .app {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   background-color: whitesmoke;
 }
@@ -12,10 +14,15 @@
 .main-content {
   display: flex;
   gap: 2rem;
-  padding-top: 64px; 
+  padding-top: 64px;
+  margin-top: 64px;
+  margin-left: 280px; 
+  min-height: calc(100vh - 64px);
+  width: calc(100% - 250px);
   margin: 0 auto;
   max-width: auto;
 }
+
 
 .products-section {
   flex: 1;
@@ -25,8 +32,8 @@
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(auto, 1fr));
-  gap: 24px;
-  padding: 16px;
+  gap: 2rem;
+  padding: 1rem;
 }
 
 @media (max-width: 768px) {
@@ -36,3 +43,9 @@
   }
 }
 
+
+.products-container {
+  margin-left: 250px; /* Width of sidebar */
+  width: calc(100% - 250px);
+  padding: 1rem;
+}
