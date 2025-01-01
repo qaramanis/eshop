@@ -1,3 +1,6 @@
 {
-    "devCommand": "next dev"
+    "devCommand": "next dev",
+    "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
 }
