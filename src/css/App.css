@@ -1,0 +1,38 @@
+.app {
+  min-height: 100vh;
+  background-color: whitesmoke;
+}
+
+.app-container {
+  width: auto;
+  min-height: 100vh;
+  background-color: #242424;
+}
+
+.main-content {
+  display: flex;
+  gap: 2rem;
+  padding-top: 64px; 
+  margin: 0 auto;
+  max-width: auto;
+}
+
+.products-section {
+  flex: 1;
+  padding: 24px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(auto, 1fr));
+  gap: 24px;
+  padding: 16px;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+      flex-direction: column;
+      padding: 64px 1rem 1rem 1rem;
+  }
+}
+

@@ -1,0 +1,93 @@
+.color-selection {
+    margin: 0.5rem 0;
+}
+
+.color-label {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.color-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.color-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    outline: 1px solid #ddd;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, outline-color 0.2s;
+}
+
+.color-button:hover {
+    transform: scale(1.1);
+}
+
+.color-button.selected {
+    outline: 2px solid #4a90e2;
+    transform: scale(1.1);
+}
+
+.check-mark {
+    color: white;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+    font-size: 16px;
+}
+
+.add-to-cart-btn.color-required {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+
+.cart-button-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 12px;
+    background-color: #333;
+    color: white;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    margin-bottom: 8px;
+    z-index: 10;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 10px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
