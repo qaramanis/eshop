@@ -1,17 +1,18 @@
 import React from "react";
 import { Search, ShoppingCart } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import '../css/NavigationBar.css';
 import { useCart } from './CartContext';
 
 const NavigationBar = () => {
-    const { cartItems } = useCart();
-
+    const { itemCount } = useCart();
+    const navigate = useNavigate();
 
     return (
         <nav className="navbar">
             <div className="navbar-container">
                 <div className="logo">
-                    <h1 className="logo-text">E-Shop</h1>
+                    <Link to="/" className="logo-text">E-Shop</Link>
                 </div>
 
                 <div className="search-container">
@@ -26,9 +27,12 @@ const NavigationBar = () => {
                 </div>
 
                 <div className="cart-container">
-                    <button className="cart-button">
+                    <button 
+                        className="cart-button"
+                        onClick={() => navigate('/cart')}
+                    >
                         <ShoppingCart size={24} />
-                        <span className="cart-badge">{cartItems.length}</span>
+                        <span className="cart-badge">{itemCount}</span>
                     </button>
                 </div>
             </div>

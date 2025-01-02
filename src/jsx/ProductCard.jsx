@@ -1,25 +1,35 @@
-// ProductCard.jsx
 import React from 'react';
 import { useState } from 'react';
 import '../css/ProductCard.css';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, Check } from 'lucide-react';
 import { useCart } from './CartContext';
 
 const ProductCard = ({ product }) => {
     const [selectedColor, setSelectedColor] = useState('');
     const { addToCart } = useCart();
     const [showTooltip, setShowTooltip] = useState(false);
+    const [showSuccessNotification, setShowSuccessNotification] = useState(false);
 
     const handleAddToCart = () => {
+        if (product.type === 'smartphones' && !selectedColor) {
+            setShowTooltip(true);
+            return;
+        }
+        
+        // Add to cart
         if (product.type === 'smartphones') {
-            if (!selectedColor) {
-                setShowTooltip(true);
-                return;
-            }
             addToCart(product, selectedColor);
         } else {
             addToCart(product);
         }
+
+        // Show success notification
+        setShowSuccessNotification(true);
+        
+        // Hide notification after 2 seconds
+        setTimeout(() => {
+            setShowSuccessNotification(false);
+        }, 2000);
     };
 
     const handleColorSelect = (color) => {
@@ -78,6 +88,12 @@ const ProductCard = ({ product }) => {
                         </button>
                         {showTooltip && product.type === 'smartphones' && !selectedColor && (
                             <div className="tooltip">Please select a color first</div>
+                        )}
+                        {showSuccessNotification && (
+                            <div className="success-notification">
+                                <Check size={16} />
+                                Added to cart!
+                            </div>
                         )}
                     </div>
                 </div>

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import '../css/App.css';
 import NavigationBar from './NavigationBar';
 import FilterSidebar from './FilterSidebar';
 import ProductGrid from './ProductGrid';
+import CartPage from './CartPage';
 import { fetchProducts } from '../SupabaseClient';
 
 function App() {
@@ -47,16 +49,21 @@ function App() {
   return (
     <div className="app">
       <NavigationBar />
-      <div className="main-content">
-        <FilterSidebar onFiltersChange={handleFiltersChange} />
-        <main className="products-container">
-          <ProductGrid 
-            products={products} 
-            loading={loading}
-            error={error}
-          />
-        </main>
-      </div>
+      <Routes>
+        <Route path="/" element={
+          <div className="main-content">
+            <FilterSidebar onFiltersChange={handleFiltersChange} />
+            <main className="products-container">
+              <ProductGrid 
+                products={products} 
+                loading={loading}
+                error={error}
+              />
+            </main>
+          </div>
+        } />
+        <Route path="/cart" element={<CartPage />} />
+      </Routes>
     </div>
   );
 }
