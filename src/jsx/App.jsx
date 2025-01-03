@@ -5,6 +5,8 @@ import NavigationBar from './NavigationBar';
 import FilterSidebar from './FilterSidebar';
 import ProductGrid from './ProductGrid';
 import CartPage from './CartPage';
+import CheckoutPage from './CheckoutPage';
+
 import { fetchProducts } from '../SupabaseClient';
 
 function App() {
@@ -63,6 +65,7 @@ function App() {
           </div>
         } />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
     </div>
   );
