@@ -73,7 +73,7 @@ const CartPage = () => {
                                 <p className="item-manufacturer">{item.manufacturer}</p>
                                 {item.selectedColor && (
                                     <p className="item-color">
-                                        Color: <span style={{ color: item.selectedColor }}>{item.selectedColor}</span>
+                                        Color: <span>{item.selectedColor}</span>
                                     </p>
                                 )}
                             </div>

@@ -17,6 +17,11 @@ const CART_STORAGE_KEY = 'eshop-cart';
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState(() => getInitialState());
 
+  const clearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem(CART_STORAGE_KEY);
+  };
+
   useEffect(() => {
     try {
       if (Array.isArray(cartItems)) {
@@ -64,9 +69,10 @@ export function CartProvider({ children }) {
   return (
     <CartContext.Provider 
       value={{ 
-        cartItems: Array.isArray(cartItems) ? cartItems : [], // Ensure we always provide an array
+        cartItems: Array.isArray(cartItems) ? cartItems : [], 
         addToCart, 
         removeFromCart,
+        clearCart,  // Add this to the context
         itemCount,
         totalPrice
       }}

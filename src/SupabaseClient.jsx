@@ -178,3 +178,87 @@ export async function fetchPriceRange(types = []) {
         max: Math.max(...allPrices)
     };
 }
+
+export async function submitOrder(formData, cartItems, totalAmount) {
+   
+    try {
+      // 1. Create the main order record
+      const { data: orderData, error: orderError } = await supabase
+        .from('orders')
+        .insert({
+          total_amount: totalAmount,
+          order_status: 'pending',
+          created_at: new Date().toISOString()
+        })
+        .select()
+        .single();
+  
+      if (orderError) throw orderError;
+  
+      // 2. Save contact information
+      const { error: contactError } = await supabase
+        .from('order_contact_info')
+        .insert({
+          order_id: orderData.id,
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone: formData.phone
+        });
+  
+      if (contactError) throw contactError;
+  
+      // 3. Save shipping information
+      const { error: shippingError } = await supabase
+        .from('order_shipping_info')
+        .insert({
+          order_id: orderData.id,
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          zipcode: formData.zipCode
+        });
+  
+      if (shippingError) throw shippingError;
+  
+      // 4. Save payment information
+      const { error: paymentError } = await supabase
+        .from('order_payment_info')
+        .insert({
+          order_id: orderData.id,
+          payment_method: formData.paymentMethod,
+          card_last_four: formData.cardNumber ? formData.cardNumber.slice(-4) : null,
+          card_expiry: formData.cardExpiry || null
+        });
+  
+      if (paymentError) throw paymentError;
+  
+      // 5. Update product quantities
+      for (const item of cartItems) {
+        const table = item.type === 'smartphones' ? 'smartphones' : 'accessories';
+        
+        // Get current quantity
+        const { data: productData, error: fetchError } = await supabase
+          .from(table)
+          .select('quantity')
+          .eq('id', item.id)
+          .single();
+  
+        if (fetchError) throw fetchError;
+  
+        // Update quantity
+        const { error: updateError } = await supabase
+          .from(table)
+          .update({ quantity: productData.quantity - 1 })
+          .eq('id', item.id);
+  
+        if (updateError) throw updateError;
+      }
+  
+      return { success: true, orderId: orderData.id };
+  
+    } catch (error) {
+      console.error('Error submitting order:', error);
+      throw new Error('Failed to process order. Please try again.');
+    }
+  }

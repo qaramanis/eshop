@@ -81,7 +81,7 @@
 
 .item-details h3.truncated {
     position: relative;
-    cursor: default !important;
+    cursor: default ;
 }
 
 .item-details h3.truncated:hover::before {
