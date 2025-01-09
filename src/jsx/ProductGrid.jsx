@@ -3,16 +3,16 @@ import '../css/ProductGrid.css';
 import ProductCard from './ProductCard';
 import { marketplaceService } from '../api/MarketplaceService.js';
 
-const ProductGrid = ({ loading }) => {
-    const [products, setProducts] = useState(null);
-    // if (loading) {
-    //     return <div className="products-loading">Loading products...</div>;
-    // }
+const ProductGrid = ({ products, loading }) => {
+    // const [products, setProducts] = useState(null);
+    // // if (loading) {
+    // //     return <div className="products-loading">Loading products...</div>;
+    // // }
     
-    async function fetchProducts() {
-        const products = await marketplaceService.getAllProducts();
-        console.log(products);
-    }
+    // async function fetchProducts() {
+    //     const products = await marketplaceService.getAllProducts();
+    //     console.log(products);
+    // }
     
     if (!products || products.length === 0) {
         return <div className="no-products">No products found matching your criteria</div>;
