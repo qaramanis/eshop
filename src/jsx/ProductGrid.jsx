@@ -1,9 +1,10 @@
-import React from 'react';
+import {React, useState} from 'react';
 import '../css/ProductGrid.css';
 import ProductCard from './ProductCard';
-import { marketplaceService } from '../api/MarketplaceService.js';
+import { marketplaceService } from '../../api/MarketplaceService.js';
 
 const ProductGrid = ({ loading }) => {
+    const [products, setProducts] = useState(null);
     // if (loading) {
     //     return <div className="products-loading">Loading products...</div>;
     // }
