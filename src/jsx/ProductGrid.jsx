@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/ProductGrid.css';
 import ProductCard from './ProductCard';
-import { marketplaceService } from './api/MarketplaceService.js';
+import { marketplaceService } from '../api/MarketplaceService.js';
 
 const ProductGrid = ({ loading }) => {
     // if (loading) {
