@@ -1,4 +1,4 @@
-import { supabase } from './SupabaseClient';
+import { supabase } from '../SupabaseClient';
 
 /**
  * MarketplaceService provides a simplified interface for marketplace integration
