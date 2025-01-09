@@ -1,12 +1,18 @@
 import React from 'react';
 import '../css/ProductGrid.css';
 import ProductCard from './ProductCard';
+import { marketplaceService } from './api/MarketplaceService';
 
-const ProductGrid = ({ products, loading }) => {
+const ProductGrid = ({ loading }) => {
     // if (loading) {
     //     return <div className="products-loading">Loading products...</div>;
     // }
-
+    
+    async function fetchProducts() {
+        const products = await marketplaceService.getAllProducts();
+        console.log(products);
+    }
+    
     if (!products || products.length === 0) {
         return <div className="no-products">No products found matching your criteria</div>;
     }
